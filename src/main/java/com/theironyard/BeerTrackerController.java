@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,16 @@ public class BeerTrackerController {
 
     @Autowired
     UserRepository users;
+
+    @PostConstruct
+    public void init(){
+        User user = users.findOneByName("Bob");
+        if (user == null){
+            user = new User();
+            user.name = "Bob";
+            users.save(user);
+        }
+    }
 
     @RequestMapping("/")
     public String home (Model model, String type, Integer calories, String search, HttpServletRequest request, String showMine){
