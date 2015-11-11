@@ -6,14 +6,20 @@
 </head>
 <body>
 
+<a href="/logout">Logout</a>
+
+<br><br>
+
 <a href="/">All</a>
 <a href="/?type=Ale">Ales</a>
 <a href="/?type=Lager">Lagers</a>
 <a href="/?type=Pilsner">Pilsners</a>
 <a href="/?type=Stout">Stouts</a>
 <a href="/?type=Other">Others</a>
+<a href="/?showMine=true">Show my Beer</a>
 
 <br><br>
+
 
 <form action="/" method="get">
     <input type="text" placeholder="Search" name="search"/>
@@ -34,7 +40,7 @@
 </form>
 
 {{#beers}}
-{{id}}. {{name}} - {{type}} - {{calories}}<br>
+{{id}}. {{name}} - {{type}} - {{calories}} by {{#user}}{{name}}{{/user}}<br>
 {{/beers}}
 </body>
 </html>
