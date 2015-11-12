@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 /**
  * Created by cameronoakley on 11/10/15.
@@ -81,7 +83,7 @@ public class BeerTrackerController {
         return "redirect:/";
     }
     @RequestMapping("/login")
-    public String login(String username, HttpServletRequest request){
+    public String login(String username, String password, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         session.setAttribute("username", username);
 
@@ -89,7 +91,11 @@ public class BeerTrackerController {
         if (user == null){
             user = new User();
             user.name = username;
+            user.password = PasswordHash.createHash(password);
             users.save(user);
+        }
+        else if (!PasswordHash.validatePassword(password, user.password)){
+            throw new Exception("Wrong password");
         }
         return "redirect:/";
     }
