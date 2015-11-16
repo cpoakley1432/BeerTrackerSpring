@@ -16,8 +16,13 @@ public class User {
     @GeneratedValue
     Integer id;
 
+    @Column(nullable = false)
     public String name;
+
+
+    @Column(nullable = false)
     public String password;
+
     @OneToMany(mappedBy = "user")//the name of the field in the beer class
     public List<Beer> beers;
 }

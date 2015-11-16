@@ -63,7 +63,7 @@ public class BeerTrackerController {
     }
 
     @RequestMapping("/add-beer")
-    public String addBeer(String beername, String beertype, int beercalories, HttpSession session){
+    public String addBeer(String beername, String beertype, Integer beercalories, HttpSession session){
         String username = (String) session.getAttribute("username");
         if (username == null){
         }
