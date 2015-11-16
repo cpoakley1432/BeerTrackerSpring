@@ -1,4 +1,4 @@
-package com.theironyard;
+package com.theironyard.entities;
 
 
 import javax.persistence.Entity;
@@ -15,9 +15,9 @@ public class Beer {
     @GeneratedValue
     Integer id;
 
-    String name;
-    String type;
-    Integer calories;
+    public String name;
+    public String type;
+    public Integer calories;
     @ManyToOne
-    User user;
+    public User user;
 }
